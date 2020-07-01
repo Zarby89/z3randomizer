@@ -1,9 +1,11 @@
 CheckReceivedItemPropertiesBeforeLoad:
     LDA $7EC005 : BNE .lightOff
+    .wasGanon
     LDA.l AddReceivedItemExpanded_properties, X ;Restore Rando Code
     RTL
 
 .lightOff
+    LDA.b $A0 : BEQ .wasGanon ;multi world fix
     PHX : PHY : PHB
     LDA.l AddReceivedItemExpanded_properties, X ; get palette
 
